@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Data</title>
+</head>
+
+<body>
+    <div id="activity-details">
+        <!-- Activity details will be displayed here -->
+    </div>
+
+    <script>
+        class Activity {
+            constructor(activity, type, participants, price) {
+                this.activity = activity;
+                this.type = type;
+                this.participants = participants;
+                this.price = price;
+            }
+
+            setActivity(activity) {
+                this.activity = activity;
+            }
+
+            setType(type) {
+                this.type = type;
+            }
+
+            setParticipants(participants) {
+                this.participants = participants;
+            }
+
+            setPrice(price) {
+                this.price = price;
+            }
+        }
+
+        fetch("https://www.boredapi.com/api/activity")
+            .then(response => response.json())
+            .then(data => {
+                const { activity, type, participants, price } = data;
+
+                const activityObj = new Activity(activity, type, participants, price);
+
+                console.log(activityObj);
+
+                const activityDetailsDiv = document.getElementById("activity-details");
+                activityDetailsDiv.innerHTML = `
+                    <h2>Activity Details</h2>
+                    <p>Activity: ${activityObj.activity}</p>
+                    <p>Type: ${activityObj.type}</p>
+                    <p>Participants: ${activityObj.participants}</p>
+                    <p>Price: ${activityObj.price}</p>
+                `;
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+    </script>
+</body>
+
+</html>
