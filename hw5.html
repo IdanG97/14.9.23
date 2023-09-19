@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data from REST API</title>
+    
+</head>
+
+<body>
+    <div id="user-details">
+        <!-- User details will be displayed here -->
+    </div>
+
+    <script>
+        class User {
+            constructor(id, name, username, email) {
+                this.id = id;
+                this.name = name;
+                this.username = username;
+                this.email = email;
+            }
+
+            setId(id) {
+                this.id = id;
+            }
+
+            setName(name) {
+                this.name = name;
+            }
+
+            setUsername(username) {
+                this.username = username;
+            }
+
+            setEmail(email) {
+                this.email = email;
+            }
+        }
+
+        fetch("https://jsonplaceholder.typicode.com/users/1")
+            .then(response => response.json())
+            .then(data => {
+                const { id, name, username, email } = data;
+
+                const user = new User(id, name, username, email);
+
+                console.log(user);
+
+                const userDetailsDiv = document.getElementById("user-details");
+                userDetailsDiv.innerHTML = `
+                    <h2>User Details</h2>
+                    <p>ID: ${user.id}</p>
+                    <p>Name: ${user.name}</p>
+                    <p>Username: ${user.username}</p>
+                    <p>Email: ${user.email}</p>
+                `;
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+    </script>
+</body>
+
+</html>
