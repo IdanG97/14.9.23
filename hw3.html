@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account info</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Bank Account info</h1>
+        <div id="output"></div>
+        <button id="createButton">Create New Bank Account</button>
+        <button id="updateButton">Update Bank Account</button>
+    </div>
+
+    <script>
+        class BankAccount {
+            constructor() {
+                this.account_number = '';
+                this.account_holder = '';
+                this.balance = '';
+                this.account_type  = '';
+            }
+
+            setAccountNumber(account_number) {
+                this.account_number = account_number;
+            }
+
+            setAccountHolder(account_holder) {
+                this.account_holder = account_holder;
+            }
+
+            setBalance(balance) {
+                this.balance = balance;
+            }
+
+            setAccountType(account_type) {
+                this.account_type = account_type;
+            }
+
+            displayDetails() {
+                return `
+                    <p><strong>Account Number:</strong> ${this.account_number}</p>
+                    <p><strong>Account Holder:</strong> ${this.account_holder}</p>
+                    <p><strong>Balance:</strong> ${this.balance}</p>
+                    <p><strong>Account Type:</strong> ${this.account_type}</p>
+                `;
+            }
+        }
+
+        const createButton = document.getElementById('createButton');
+        const updateButton = document.getElementById('updateButton');
+        const output = document.getElementById('output');
+
+        const bankAccount = new BankAccount();
+        
+        createButton.addEventListener('click', () => {
+            bankAccount.setAccountNumber(prompt('Enter Account Number:'));
+            bankAccount.setAccountHolder(prompt('Enter Account Holder:'));
+            bankAccount.setBalance(prompt('Enter Balance:'));
+            bankAccount.setAccountType(prompt('Enter Account Type:'));
+
+            output.innerHTML = bankAccount.displayDetails();
+        });
+
+        updateButton.addEventListener('click', () => {
+            const account_number = prompt('Enter New Account Number:');
+            const account_holder = prompt('Enter New Account Holder:');
+            const balance = prompt('Enter New Balance:');
+            const account_type = prompt('Enter New Account Type:');
+
+            bankAccount.setAccountHolder(account_number);
+            bankAccount.setAccountHolder(account_holder);
+            bankAccount.setBalance(balance);
+            bankAccount.setAccountType(account_type);
+
+            output.innerHTML = bankAccount.displayDetails();
+        });
+    </script>
+</body>
+
+</html>
