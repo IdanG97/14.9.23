@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Person info</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Person info</h1>
+        <div id="output"></div>
+        <button id="createButton">Create New Person</button>
+        <button id="updateButton">Update Person</button>
+    </div>
+
+    <script>
+        class Person {
+            constructor() {
+                this.name = '';
+                this.age = '';
+                this.gender = '';
+                this.address = '';
+            }
+
+            setName(name) {
+                this.name = name;
+            }
+
+            setAge(age) {
+                this.age = age;
+            }
+
+            setGender(gender) {
+                this.gender = gender;
+            }
+
+            setAddress(address) {
+                this.address = address;
+            }
+
+            displayDetails() {
+                return `
+                    <p><strong>Name:</strong> ${this.name}</p>
+                    <p><strong>Age:</strong> ${this.age}</p>
+                    <p><strong>Gander:</strong> ${this.gender}</p>
+                    <p><strong>Address:</strong> ${this.address}</p>
+                `;
+            }
+        }
+
+        const createButton = document.getElementById('createButton');
+        const updateButton = document.getElementById('updateButton');
+        const output = document.getElementById('output');
+
+        const person = new Person();
+        
+        createButton.addEventListener('click', () => {
+            person.setName(prompt('Enter name:'));
+            person.setAge(prompt('Enter age: 18-120'));
+            person.setGender(prompt('Enter gender: Male, Female, Else'));
+            person.setAddress(prompt('Enter address:'));
+
+            output.innerHTML = person.displayDetails();
+        });
+
+        updateButton.addEventListener('click', () => {
+            const name = prompt('Enter New Name:');
+            const age = prompt('Enter New Age: 18-120');
+            const gender = prompt('Enter New Gender: Male, Female, Else');
+            const address = prompt('Enter New Address:');
+
+            person.setName(name);
+            person.setAge(age);
+            person.setGender(gender);
+            person.setAddress(address);
+
+            output.innerHTML = person.displayDetails();
+        });
+    </script>
+</body>
+
+</html>
