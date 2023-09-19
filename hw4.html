@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guitar info</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Guitar info</h1>
+        <div id="output"></div>
+        <button id="createButton">Create New Guitar</button>
+        <button id="updateButton">Update Guitar</button>
+    </div>
+
+    <script>
+        class Guitar {
+            constructor() {
+                this.brand = '';
+                this.model = '';
+                this.strings = '';
+                this.price  = '';
+            }
+
+            setBrand(brand) {
+                this.brand = brand;
+            }
+
+            setModel(model) {
+                this.model = model;
+            }
+
+            setStrings(strings) {
+                this.strings = strings;
+            }
+
+            setPrice(price) {
+                this.price = price;
+            }
+
+            displayDetails() {
+                return `
+                    <p><strong>Brand:</strong> ${this.brand}</p>
+                    <p><strong>Model:</strong> ${this.model}</p>
+                    <p><strong>Strings:</strong> ${this.strings}</p>
+                    <p><strong>Price:</strong> ${this.price}</p>
+                `;
+            }
+        }
+
+        const createButton = document.getElementById('createButton');
+        const updateButton = document.getElementById('updateButton');
+        const output = document.getElementById('output');
+
+        const guitar = new Guitar();
+        
+        createButton.addEventListener('click', () => {
+            guitar.setBrand(prompt('Enter Brand: Fender, Ibanez etc'));
+            guitar.setModel(prompt('Enter Model:'));
+            guitar.setStrings(prompt('Enter Amount Of Strings: 6-8'));
+            guitar.setPrice(prompt('Enter Price: 1000$-10,000$'));
+
+            output.innerHTML = guitar.displayDetails();
+        });
+
+        updateButton.addEventListener('click', () => {
+            const brand = prompt('Enter New Brand: Fender, Ibanez etc');
+            const model = prompt('Enter New Model:');
+            const strings = prompt('Enter New Amount Of Strings: 6-8');
+            const price = prompt('Enter New Price: 1000$-10,000$');
+
+            guitar.setBrand(brand);
+            guitar.setModel(model);
+            guitar.setStrings(strings);
+            guitar.setPrice(price);
+
+            output.innerHTML = guitar.displayDetails();
+        });
+    </script>
+</body>
+
+</html>
