@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details from REST API</title>
+</head>
+
+<body>
+    <div id="user-details">
+        <!-- User details will be displayed here -->
+    </div>
+
+    <script>
+        class GameAccount {
+            constructor(userId, password, email, avatar) {
+                this.userId = userId;
+                this.password = password;
+                this.email = email;
+                this.avatar = avatar;
+            }
+
+            setUserId(userId) {
+                this.userId = userId;
+            }
+
+            setPassword(password) {
+                this.password = password;
+            }
+
+            setEmail(email) {
+                this.email = email;
+            }
+
+            setAvatar(avatar) {
+                this.avatar = avatar;
+            }
+        }
+
+        fetch("https://random-data-api.com/api/users/random_user")
+            .then(response => response.json())
+            .then(data => {
+                const { id, password, email, avatar } = data;
+
+                const gameAccount = new GameAccount(id, password, email, avatar);
+
+                console.log(gameAccount);
+
+                const userDetailsDiv = document.getElementById("user-details");
+                userDetailsDiv.innerHTML = `
+                    <h2>Game Account Details</h2>
+                    <p>User Id: ${gameAccount.userId}</p>
+                    <p>Password: ${gameAccount.password}</p>
+                    <p>Email: ${gameAccount.email}</p>
+                    <img src="${gameAccount.avatar}" alt="Avatar">
+                `;
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+    </script>
+</body>
+
+</html>
